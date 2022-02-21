@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-zoom-session",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Node-red Zoom SDK session generator node",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
