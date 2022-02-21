@@ -1,0 +1,21 @@
+{
+  "name": "node-red-contrib-zoom-session",
+  "version": "1.0.1",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node-red"
+  ],
+  "node-red": {
+    "nodes": {
+      "zoom-session": "zoom-session.js"
+    }
+  },
+  "author": "Eugene Zaidun",
+  "license": "ISC",
+  "dependencies": {
+    "jsrsasign": "10.5.7"
+  }
+}
