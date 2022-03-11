@@ -3,7 +3,7 @@ const KJUR = require("jsrsasign");
 function generateVideoToken(
   sdkKey,
   sdkSecret,
-  topic,
+  topic = "",
   passWord = "",
   userIdentity = "",
   sessionKey = ""
@@ -41,6 +41,8 @@ module.exports = function (RED) {
     RED.nodes.createNode(this, node);
     this.sdkKey = node.sdkKey;
     this.sdkSecret = node.sdkSecret;
+    // this.topic = node.topic;
+    // this.password = node.password;
   }
 
   RED.nodes.registerType("zoom-session-config", ZoomSessionConfig);
@@ -52,16 +54,20 @@ module.exports = function (RED) {
 
     if (this.zoomSessionConfig) {
       node.on("input", (msg) => {
-        const session = generateVideoToken(
+        const signature = generateVideoToken(
           this.zoomSessionConfig.sdkKey,
           this.zoomSessionConfig.sdkSecret,
-          this.zoomSessionConfig.name,
-          this.zoomSessionConfig.password
+          "topic",
+          "password",
+          "username",
+          "test"
         );
 
         msg.payload = {
-          session,
+          signature,
+          topic: "topic",
         };
+
         node.send(msg);
       });
     } else {
