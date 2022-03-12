@@ -57,15 +57,15 @@ module.exports = function (RED) {
         const signature = generateVideoToken(
           this.zoomSessionConfig.sdkKey,
           this.zoomSessionConfig.sdkSecret,
-          "topic",
-          "password",
+          "hello",
+          "test",
           "username",
           "test"
         );
 
         msg.payload = {
           signature,
-          topic: "topic",
+          topic: "hello",
         };
 
         node.send(msg);
