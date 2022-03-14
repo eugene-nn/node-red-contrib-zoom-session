@@ -50,13 +50,12 @@ module.exports = function (RED) {
   function ZoomeSessionNode(config) {
     var node = this;
     RED.nodes.createNode(this, config);
-    this.zoomSessionConfig = RED.nodes.getNode(config.zoomSessionConfig);
 
-    if (this.zoomSessionConfig) {
-      node.on("input", (msg) => {
+    node.on("input", (msg) => {
+      if (msg.payload && msg.payload.sdkKey && msg.payload.sdkSecret) {
         const signature = generateVideoToken(
-          this.zoomSessionConfig.sdkKey,
-          this.zoomSessionConfig.sdkSecret,
+          msg.payload.sdkKey,
+          msg.payload.sdkSecret,
           "hello",
           "test",
           "username",
@@ -69,10 +68,10 @@ module.exports = function (RED) {
         };
 
         node.send(msg);
-      });
-    } else {
-      node.send({ payload: "No session configured" });
-    }
+      } else {
+        node.send({ payload: "No session configured" });
+      }
+    });
   }
 
   RED.nodes.registerType("zoom-session", ZoomeSessionNode);
