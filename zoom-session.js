@@ -56,7 +56,7 @@ module.exports = function (RED) {
         const signature = generateVideoToken(
           msg.payload.sdkKey,
           msg.payload.sdkSecret,
-          "hello",
+          msg.payload.topic,
           "test",
           "username",
           "test"
@@ -64,7 +64,7 @@ module.exports = function (RED) {
 
         msg.payload = {
           signature,
-          topic: "hello",
+          topic: msg.payload.topic,
         };
 
         node.send(msg);
